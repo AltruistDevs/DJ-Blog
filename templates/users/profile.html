@@ -1,0 +1,69 @@
+{% extends 'blog_app/base.html' %} {% block title %}Profile {% endblock %}
+<!--  -->
+{% block content %}
+<!-- <div class="md:w-1/2 w-full my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+  <h3 class="text-center">This is the profile page for {{user.username}}</h3>
+</div> -->
+{%if messages%} {% for message in messages %}
+<div class="mb-4 bg-teal-500 text-center rounded-lg px-4 py-4">
+  <h2 style="color: black">{{message}}</h2>
+</div>
+{%endfor%} {%endif%}
+<div class="ml-auto items-center">
+  <div class="my-3 p-3">
+    <img
+      class="rounded-full cursor-pointer"
+      src="{{user.profile.profile_picture.url}}"
+    />
+  </div>
+  <div>
+    <h2>{{user.username}}</h2>
+    <p>{{user.email}}</p>
+    {%if user.profile.bio%}
+    <p>{{user.profile.bio}}</p>
+    {%else%}
+    <p>Bio not yet added</p>
+    {%endif%}
+  </div>
+</div>
+{%if request.user%}
+<div class="mt-8 md:w-1/2 w-full my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="inline-block mb-2">Username:</label><br />
+      {{user_form.username}}
+    </div>
+    <div class="mb-3">
+      <label class="inline-block mb-2">Body</label><br />
+      {{user_form.email}}
+    </div>
+    <!-- <div class="mb-3">
+      <label class="inline-block mb-2">Tags</label><br />
+      {{form.tags}}
+    </div> -->
+    <div class="mb-3">
+      <label class="inline-block mb-2">Change Profile picture:</label><br />
+      {{profile_form.profile_picture}}
+    </div>
+    <div class="mb-3">
+      <label class="inline-block mb-2">Bio:</label><br />
+      {{profile_form.bio}}
+    </div>
+    <div class="flex flex-wrap">
+      <button
+        type="submit"
+        class="px-8 rounded-xl text-white text-lg bg-teal-500 hover:bg-teal-700"
+      >
+        Update Profile
+      </button>
+      <button
+        type="reset"
+        class="py-4 px-8 ml-auto rounded-xl text-slate text-lg bg-white border-red-500 border border-solid"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+{%endif%} {%endblock%}
