@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'blog_app.apps.BlogAppConfig',
     'tailwind',
     'theme',
-    'django_browser_reload',
+    #'django_browser_reload',
     'imagekit',
 ]
 
